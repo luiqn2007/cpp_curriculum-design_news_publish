@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>NewsDetailDialogClass</class>
+ <widget class="QDialog" name="NewsDetailDialogClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>887</width>
+    <height>620</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>查看新闻</string>
+  </property>
+  <widget class="QLabel" name="lbl_title">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>581</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>新闻标题</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="tb_news">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>80</y>
+     <width>581</width>
+     <height>531</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_author">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>56</y>
+     <width>53</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>作者</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_date">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>55</y>
+     <width>71</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>2024/06/22</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pb_edit">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>编辑</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_like_count">
+   <property name="geometry">
+    <rect>
+     <x>449</x>
+     <y>52</y>
+     <width>110</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>1000</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pb_like">
+   <property name="geometry">
+    <rect>
+     <x>564</x>
+     <y>50</y>
+     <width>21</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="MainWindow.qrc">
+     <normaloff>:/images/like.png</normaloff>:/images/like.png</iconset>
+   </property>
+   <property name="default">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>20</y>
+     <width>53</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>评论：</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pb_comment">
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>10</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>发布评论</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="lw_comment">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>40</y>
+     <width>281</width>
+     <height>571</height>
+    </rect>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SelectionMode::NoSelection</enum>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="MainWindow.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>pb_like</sender>
+   <signal>clicked()</signal>
+   <receiver>NewsDetailDialogClass</receiver>
+   <slot>toggle_like()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>574</x>
+     <y>61</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>593</x>
+     <y>45</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pb_edit</sender>
+   <signal>clicked()</signal>
+   <receiver>NewsDetailDialogClass</receiver>
+   <slot>edit_news()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>55</x>
+     <y>59</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>137</x>
+     <y>53</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pb_comment</sender>
+   <signal>clicked()</signal>
+   <receiver>NewsDetailDialogClass</receiver>
+   <slot>comment_news()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>841</x>
+     <y>22</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>743</x>
+     <y>4</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>toggle_like()</slot>
+  <slot>edit_news()</slot>
+  <slot>comment_news()</slot>
+ </slots>
+</ui>

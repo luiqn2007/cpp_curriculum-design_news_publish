@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="头文件\gui">
+      <UniqueIdentifier>{557db8ad-467b-4023-b279-b3bf51aa05e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\service">
+      <UniqueIdentifier>{4117d98d-4197-4e01-bdbb-bfa2c818b114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\entry">
+      <UniqueIdentifier>{c66d3866-4834-4449-9ecb-df7503f82207}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="窗口文件">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>qrc;rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>qml;cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="源文件\gui">
+      <UniqueIdentifier>{1907ed6c-5035-4832-9d50-f4cbb480ae16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\service">
+      <UniqueIdentifier>{dc7bb7d4-edca-4f49-9ecc-68e5ad7e8834}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="语言文件">
+      <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
+      <Extensions>ts</Extensions>
+    </Filter>
+    <Filter Include="资源文件\images">
+      <UniqueIdentifier>{e874ca40-7824-4687-a3e8-a027f78ab977}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="MainWindow.qrc">
+      <Filter>资源文件</Filter>
+    </QtRcc>
+    <QtUic Include="MainWindow.ui">
+      <Filter>窗口文件</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="NewsItemWidget.ui">
+      <Filter>窗口文件</Filter>
+    </QtUic>
+    <QtUic Include="PublishNewsDialog.ui">
+      <Filter>窗口文件</Filter>
+    </QtUic>
+    <QtUic Include="NewsDetailDialog.ui">
+      <Filter>窗口文件</Filter>
+    </QtUic>
+    <QtUic Include="ReplyDialog.ui">
+      <Filter>窗口文件</Filter>
+    </QtUic>
+    <QtUic Include="NewsEditDialog.ui">
+      <Filter>窗口文件</Filter>
+    </QtUic>
+    <QtUic Include="LoginDialog.ui">
+      <Filter>窗口文件</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="languages.lang">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\Project\config.property">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\like.png">
+      <Filter>资源文件\images</Filter>
+    </Image>
+    <Image Include="images\reply.png">
+      <Filter>资源文件\images</Filter>
+    </Image>
+    <Image Include="images\unlike.png">
+      <Filter>资源文件\images</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Common.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Property.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CommentService.cpp">
+      <Filter>源文件\service</Filter>
+    </ClCompile>
+    <ClCompile Include="UserService.cpp">
+      <Filter>源文件\service</Filter>
+    </ClCompile>
+    <ClCompile Include="TypeService.cpp">
+      <Filter>源文件\service</Filter>
+    </ClCompile>
+    <ClCompile Include="NewsService.cpp">
+      <Filter>源文件\service</Filter>
+    </ClCompile>
+    <ClCompile Include="CommentWidget.cpp">
+      <Filter>源文件\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginDialog.cpp">
+      <Filter>源文件\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="MainWindow.cpp">
+      <Filter>源文件\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="NewsDetailDialog.cpp">
+      <Filter>源文件\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="NewsEditDialog.cpp">
+      <Filter>源文件\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="NewsItemWidget.cpp">
+      <Filter>源文件\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="PublishNewsDialog.cpp">
+      <Filter>源文件\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplyDialog.cpp">
+      <Filter>源文件\gui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Property.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CommentService.h">
+      <Filter>头文件\service</Filter>
+    </ClInclude>
+    <ClInclude Include="NewsService.h">
+      <Filter>头文件\service</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeService.h">
+      <Filter>头文件\service</Filter>
+    </ClInclude>
+    <ClInclude Include="UserService.h">
+      <Filter>头文件\service</Filter>
+    </ClInclude>
+    <ClInclude Include="Comment.h">
+      <Filter>头文件\entry</Filter>
+    </ClInclude>
+    <ClInclude Include="DbData.h">
+      <Filter>头文件\entry</Filter>
+    </ClInclude>
+    <ClInclude Include="News.h">
+      <Filter>头文件\entry</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>头文件\entry</Filter>
+    </ClInclude>
+    <ClInclude Include="Type.h">
+      <Filter>头文件\entry</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceResult.h">
+      <Filter>头文件\service</Filter>
+    </ClInclude>
+    <ClInclude Include="Session.h">
+      <Filter>头文件\service</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="CommentWidget.h">
+      <Filter>头文件\gui</Filter>
+    </QtMoc>
+    <QtMoc Include="LoginDialog.h">
+      <Filter>头文件\gui</Filter>
+    </QtMoc>
+    <QtMoc Include="MainWindow.h">
+      <Filter>头文件\gui</Filter>
+    </QtMoc>
+    <QtMoc Include="NewsDetailDialog.h">
+      <Filter>头文件\gui</Filter>
+    </QtMoc>
+    <QtMoc Include="NewsEditDialog.h">
+      <Filter>头文件\gui</Filter>
+    </QtMoc>
+    <QtMoc Include="NewsItemWidget.h">
+      <Filter>头文件\gui</Filter>
+    </QtMoc>
+    <QtMoc Include="PublishNewsDialog.h">
+      <Filter>头文件\gui</Filter>
+    </QtMoc>
+    <QtMoc Include="ReplyDialog.h">
+      <Filter>头文件\gui</Filter>
+    </QtMoc>
+  </ItemGroup>
+</Project>

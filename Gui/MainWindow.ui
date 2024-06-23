@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindowClass</class>
+ <widget class="QMainWindow" name="MainWindowClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>新闻发布系统</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QListWidget" name="lst_news">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>104</y>
+      <width>771</width>
+      <height>431</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>20</y>
+      <width>261</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>新闻发布系统</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cb_type">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>79</y>
+      <width>81</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>热门</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>全部</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>归档</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>84</y>
+      <width>53</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>新闻类型：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_year">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>84</y>
+      <width>53</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>归档年份：</string>
+    </property>
+   </widget>
+   <widget class="QDateEdit" name="de_year">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>80</y>
+      <width>101</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="dateTime">
+     <datetime>
+      <hour>0</hour>
+      <minute>0</minute>
+      <second>0</second>
+      <year>2023</year>
+      <month>12</month>
+      <day>30</day>
+     </datetime>
+    </property>
+    <property name="maximumTime">
+     <time>
+      <hour>23</hour>
+      <minute>59</minute>
+      <second>59</second>
+     </time>
+    </property>
+    <property name="displayFormat">
+     <string>yyyy</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_user">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>80</y>
+      <width>71</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>游客</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_login">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>80</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>登录/注册</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_publish">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>550</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>发布新闻</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_page_selector">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>550</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>第                   页</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_prev">
+    <property name="geometry">
+     <rect>
+      <x>241</x>
+      <y>547</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>上一页</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_next">
+    <property name="geometry">
+     <rect>
+      <x>443</x>
+      <y>546</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>下一页</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="le_page">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>550</y>
+      <width>41</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="le_count">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>550</y>
+      <width>41</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>10</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>550</y>
+      <width>121</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>每页             条新闻</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_page_total">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>576</y>
+      <width>140</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>（共          页）</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_page">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>580</y>
+      <width>60</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+   </widget>
+   <zorder>lbl_page_total</zorder>
+   <zorder>lbl_page_selector</zorder>
+   <zorder>label_6</zorder>
+   <zorder>lst_news</zorder>
+   <zorder>label</zorder>
+   <zorder>cb_type</zorder>
+   <zorder>label_2</zorder>
+   <zorder>lbl_year</zorder>
+   <zorder>de_year</zorder>
+   <zorder>lbl_user</zorder>
+   <zorder>pb_login</zorder>
+   <zorder>pb_publish</zorder>
+   <zorder>pb_prev</zorder>
+   <zorder>pb_next</zorder>
+   <zorder>le_page</zorder>
+   <zorder>le_count</zorder>
+   <zorder>lbl_page</zorder>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="MainWindow.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>lst_news</sender>
+   <signal>itemClicked(QListWidgetItem*)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>view_news(QListWidgetItem*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>132</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>554</x>
+     <y>68</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pb_login</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>login_or_logout()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>728</x>
+     <y>86</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>730</x>
+     <y>41</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>de_year</sender>
+   <signal>editingFinished()</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>reload_archived_news()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>264</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>242</x>
+     <y>33</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cb_type</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>reload_type_news()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>108</x>
+     <y>88</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>68</x>
+     <y>39</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pb_publish</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>publish_news()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>42</x>
+     <y>561</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>158</x>
+     <y>548</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pb_prev</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>prev_page()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>287</x>
+     <y>562</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>254</x>
+     <y>575</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pb_next</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>next_page()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>505</x>
+     <y>561</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>561</x>
+     <y>551</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>le_page</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>reload_page_news()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>378</x>
+     <y>562</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>381</x>
+     <y>576</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>le_count</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>reload_count_news()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>705</x>
+     <y>562</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>700</x>
+     <y>578</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>view_news(QListWidgetItem*)</slot>
+  <slot>login_or_logout()</slot>
+  <slot>publish_news()</slot>
+  <slot>prev_page()</slot>
+  <slot>next_page()</slot>
+  <slot>reload_archived_news()</slot>
+  <slot>reload_type_news()</slot>
+  <slot>reload_page_news()</slot>
+  <slot>reload_count_news()</slot>
+ </slots>
+</ui>
