@@ -14,6 +14,10 @@ public:
 	ReplyDialog(News *news, QWidget *parent = nullptr);
 	~ReplyDialog() override = default;
 
+public slots:
+	/**
+	 * »Ø¸´
+	 */
 	void reply();
 
 private:

@@ -112,7 +112,7 @@
     <QtUic Include="ReplyDialog.ui" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Project\config.property" />
+    <None Include="config.property" />
     <None Include="languages.lang" />
   </ItemGroup>
   <ItemGroup>

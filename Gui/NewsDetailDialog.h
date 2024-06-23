@@ -13,13 +13,26 @@ public:
 	NewsDetailDialog(News* news, QWidget* parent = nullptr);
 	~NewsDetailDialog() override = default;
 
+	/**
+	 * 重载评论
+	 */
+	void reload_comments();
+
+public slots:
+	/**
+	 * 切换点赞状态
+	 */
 	void toggle_like();
 
+	/**
+	 * 编辑新闻
+	 */
 	void edit_news();
 
+	/**
+	 * 回复新闻
+	 */
 	void comment_news();
-
-	void reload_comments();
 
 private:
 	Ui::NewsDetailDialogClass ui;

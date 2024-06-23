@@ -11,8 +11,15 @@ public:
 	LoginDialog(QWidget *parent = nullptr);
 	~LoginDialog() override = default;
 
+public slots:
+	/**
+	 * µÇÂ¼
+	 */
 	void login();
 
+	/**
+	 * ×¢²á
+	 */
 	void register_user();
 
 private:

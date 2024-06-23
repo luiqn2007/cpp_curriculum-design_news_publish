@@ -72,7 +72,7 @@
     <None Include="languages.lang">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="..\Project\config.property">
+    <None Include="config.property">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>

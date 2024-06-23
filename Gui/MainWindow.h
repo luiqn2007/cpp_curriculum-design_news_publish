@@ -1,13 +1,11 @@
 #pragma once
 
-#include <unordered_map>
 #include <string>
 #include <vector>
 
 #include "News.h"
 #include "ui_MainWindow.h"
 
-using std::unordered_map;
 using std::string;
 using std::vector;
 
@@ -18,6 +16,8 @@ class MainWindow : public QMainWindow
 public:
 	explicit MainWindow(QWidget* parent = nullptr);
 	~MainWindow() override = default;
+
+public slots:
 
 	/**
 	 * 发布新闻

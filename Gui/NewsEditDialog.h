@@ -13,6 +13,10 @@ public:
 	explicit NewsEditDialog(News* news, QWidget* parent = nullptr);
 	~NewsEditDialog() override = default;
 
+public slots:
+	/**
+	 * 保存修改新闻
+	 */
 	void save();
 
 private:

@@ -14,6 +14,11 @@ public:
 	CommentWidget(int index, int reply, Comment* comment, NewsDetailDialog* dialog, QWidget* parent = nullptr);
 	~CommentWidget() override = default;
 
+public slots:
+
+	/**
+	 * »Ø¸´
+	 */
 	void reply();
 
 private:
