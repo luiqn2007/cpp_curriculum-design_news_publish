@@ -86,6 +86,9 @@
     <Image Include="images\unlike.png">
       <Filter>资源文件\images</Filter>
     </Image>
+    <Image Include="images\news.png">
+      <Filter>资源文件\images</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common.cpp">

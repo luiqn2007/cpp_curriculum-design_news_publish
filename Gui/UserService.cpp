@@ -13,6 +13,10 @@ ServiceResult UserService::register_user(string username, string password, bool 
 	ss << "username = '" << username << "'";
 	try
 	{
+		if (username.empty() || password.empty())
+		{
+			return { lang->get_value("name_pwd_empty", "Empty username or password") };
+		}
 		auto schema = session->conn->getDefaultSchema();
 		auto table = schema.getTable("users", true);
 		auto result = table.select("*").where(ss.str()).execute();

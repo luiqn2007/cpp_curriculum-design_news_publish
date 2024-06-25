@@ -3,6 +3,7 @@ login_failed=登录失败
 register=注册
 is_admin=是否为管理员？
 register_failed=注册失败
+name_pwd_empty=用户名或密码为空
 publish_news=发布新闻
 login_first=请先登录
 only_admin_can_publish=只有管理员可以发布新闻，请联系管理员

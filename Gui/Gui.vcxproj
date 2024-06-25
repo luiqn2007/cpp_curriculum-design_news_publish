@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\like.png" />
+    <Image Include="images\news.png" />
     <Image Include="images\reply.png" />
     <Image Include="images\unlike.png" />
   </ItemGroup>
