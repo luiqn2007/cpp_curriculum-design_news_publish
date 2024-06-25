@@ -164,6 +164,19 @@
     <enum>QAbstractItemView::SelectionMode::NoSelection</enum>
    </property>
   </widget>
+  <widget class="QPushButton" name="pb_delete">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>50</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>删除</string>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
@@ -218,10 +231,27 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pb_delete</sender>
+   <signal>clicked()</signal>
+   <receiver>NewsDetailDialogClass</receiver>
+   <slot>delete_news()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>117</x>
+     <y>64</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>209</x>
+     <y>53</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>toggle_like()</slot>
   <slot>edit_news()</slot>
   <slot>comment_news()</slot>
+  <slot>delete_news()</slot>
  </slots>
 </ui>

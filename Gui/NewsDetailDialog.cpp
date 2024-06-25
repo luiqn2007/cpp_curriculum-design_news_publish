@@ -27,6 +27,8 @@ void NewsDetailDialog::reload_news()
 
 	ui.pb_edit->setVisible(session->user && session->user->is_admin());
 	ui.pb_edit->setEnabled(session->user && session->user->is_admin());
+	ui.pb_delete->setVisible(session->user && session->user->is_admin());
+	ui.pb_delete->setEnabled(session->user && session->user->is_admin());
 
 	const bool is_like = user_service->is_login_user_like(*news_);
 	const QBitmap like = QBitmap::fromImage(QImage(":/images/like.png"));
@@ -99,6 +101,39 @@ void NewsDetailDialog::edit_news()
 	else
 	{
 		done(NewsEditDialog(news_, dynamic_cast<QWidget*>(parent())).exec());
+	}
+}
+
+void NewsDetailDialog::delete_news()
+{
+	if (!session->user)
+	{
+		QMessageBox::critical(this,
+			QString::fromStdString(lang->get_value("delete_news", "Delete News")),
+			QString::fromStdString(lang->get_value("error_status", "Invalid login status")));
+	}
+	else if (!session->user->is_admin())
+	{
+		QMessageBox::critical(this,
+			QString::fromStdString(lang->get_value("delete_news", "Delete News")),
+			QString::fromStdString(lang->get_value("only_admin_can_edit", "Only administrator can edit news")));
+	}
+	else
+	{
+		const auto result = news_service->delete_news(*news_);
+		if (result.success)
+		{
+			QMessageBox::information(this,
+				QString::fromStdString(lang->get_value("delete_news", "Delete News")),
+				QString::fromStdString(lang->get_value("deleted", "News is deleted")));
+			accept();
+		}
+		else
+		{
+			QMessageBox::critical(this,
+				QString::fromStdString(lang->get_value("delete_news", "Delete News")),
+				QString::fromStdString(result.err));
+		}
 	}
 }
 

@@ -30,6 +30,11 @@ public slots:
 	void edit_news();
 
 	/**
+	 * 删除新闻
+	 */
+	void delete_news();
+
+	/**
 	 * 回复新闻
 	 */
 	void comment_news();
