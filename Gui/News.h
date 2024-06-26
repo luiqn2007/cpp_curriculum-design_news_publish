@@ -14,7 +14,6 @@ class News :
 {
 	string title_, author_, content_, publish_;
 	vector<Type> types_ = vector<Type>();
-	vector<Comment> comments_ = vector<Comment>();
 	int like_count_;
 
 public:
@@ -58,14 +57,6 @@ public:
 	vector<Type>& types()
 	{
 		return types_;
-	}
-
-	/**
-	 * ĞÂÎÅÆÀÂÛ
-	 */
-	vector<Comment>& comments()
-	{
-		return comments_;
 	}
 
 	/**

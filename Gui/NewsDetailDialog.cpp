@@ -2,6 +2,7 @@
 
 #include <QMessageBox>
 
+#include "CommentService.h"
 #include "CommentWidget.h"
 #include "Common.h"
 #include "NewsEditDialog.h"
@@ -63,9 +64,10 @@ void NewsDetailDialog::toggle_like()
 
 void NewsDetailDialog::reload_comments()
 {
-	const auto count = news_->comments().size();
+	auto comments = comment_service->get_comment_by_news(*news_);
+	const auto count = comments.size();
 	int index = 1;
-	for (Comment& comment : news_->comments())
+	for (Comment& comment : comments)
 	{
 		index = insert_comment(index, comment, 0);
 	}

@@ -1,16 +1,14 @@
 #include "UserService.h"
 
-#include <sstream>
+#include <format>
 
 #include "Common.h"
 #include "Session.h"
 
-using std::stringstream;
+using std::format;
 
 ServiceResult UserService::register_user(string username, string password, bool is_admin)
 {
-	stringstream ss;
-	ss << "username = '" << username << "'";
 	try
 	{
 		if (username.empty() || password.empty())
@@ -19,7 +17,7 @@ ServiceResult UserService::register_user(string username, string password, bool 
 		}
 		auto schema = session->conn->getDefaultSchema();
 		auto table = schema.getTable("users", true);
-		auto result = table.select("*").where(ss.str()).execute();
+		auto result = table.select("*").where(format("username = '{}'", username)).execute();
 		if (result.count() > 0)
 		{
 			return {lang->get_value("username_existed", "Username is existed")};
@@ -43,11 +41,10 @@ ServiceResult UserService::login(string username, string password)
 {
 	try
 	{
-		stringstream ss;
-		ss << "username = '" << username << "' and password = '" << password << "'";
 		auto schema = session->conn->getDefaultSchema();
 		auto table = schema.getTable("users");
-		for (auto d : table.select("*").where(ss.str()).execute())
+		auto rows = table.select("*").where(format("username = '{}' and password = '{}'", username, password)).execute();
+		for (auto d : rows)
 		{
 			int id = d[0].get<int>();
 			auto uname = d[1].get<string>();
@@ -71,11 +68,9 @@ bool UserService::is_login_user_like(News& news)
 	{
 		try
 		{
-			stringstream ss;
-			ss << "news_id = " << news.id() << " and user_id = " << session->user->id();
 			auto schema = session->conn->getDefaultSchema();
 			is_like = schema.getTable("news_types", true)
-			                .select(ss.str())
+			                .select(format("news_id = {} and user_id = {}", news.id(), session->user->id()))
 			                .execute()
 			                .count() > 0;
 		}
@@ -87,7 +82,7 @@ bool UserService::is_login_user_like(News& news)
 	return is_like;
 }
 
-bool UserService::toggle_login_user_like(News& news)
+bool UserService::toggle_login_user_like(const News& news)
 {
 	if (!session->user)
 	{
@@ -96,13 +91,12 @@ bool UserService::toggle_login_user_like(News& news)
 
 	try
 	{
-		stringstream ss;
-		ss << "news_id = " << news.id() << " and user_id = " << session->user->id();
 		auto schema = session->conn->getDefaultSchema();
 		auto table = schema.getTable("news_types", true);
-		if (table.select(ss.str()).execute().count() > 0)
+		auto sql = format("news_id = {} and user_id = {}", news.id(), session->user->id());
+		if (table.select(sql).execute().count() > 0)
 		{
-			table.remove().where(ss.str()).execute();
+			table.remove().where(sql).execute();
 			return false;
 		}
 		return true;
@@ -112,4 +106,19 @@ bool UserService::toggle_login_user_like(News& news)
 		printf_s("%s\n", e.what());
 		return false;
 	}
+}
+
+User* UserService::get_user_by_id(const int id)
+{
+	if (user_cache_.count(id))
+	{
+		return user_cache_[id];
+	}
+
+	auto schema = session->conn->getDefaultSchema();
+	auto table = schema.getTable("users");
+	auto rows = table.select("*").where(format("user_id = {}", id)).execute();
+	auto d = rows.fetchOne();
+	user_cache_[id] = new User(id, d[1].get<string>(), d[3].get<bool>());
+	return user_cache_[id];
 }

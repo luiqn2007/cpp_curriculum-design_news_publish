@@ -1,12 +1,17 @@
 #pragma once
 #include <string>
+#include <unordered_map>
+
 #include "News.h"
 #include "ServiceResult.h"
 
 using std::string;
+using std::unordered_map;
 
 class UserService
 {
+	unordered_map<int, User*> user_cache_;
+
 public:
 	/**
 	 * 注册用户
@@ -37,5 +42,12 @@ public:
 	 * @param news 新闻
 	 * @return 切换后，用户是否点赞了该新闻
 	 */
-	bool toggle_login_user_like(News& news);
+	bool toggle_login_user_like(const News& news);
+
+	/**
+	 * 根据用户编号获取用户
+	 * @param id 用户编号
+	 * @return 用户
+	 */
+	User* get_user_by_id(int id);
 };

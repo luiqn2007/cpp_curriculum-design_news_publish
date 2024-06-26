@@ -1,5 +1,6 @@
 #include "PublishNewsDialog.h"
 
+#include <vector>
 #include <QMessageBox>
 
 #include "Common.h"
@@ -8,6 +9,8 @@
 #include "News.h"
 #include "Session.h"
 #include "TypeService.h"
+
+using std::vector;
 
 PublishNewsDialog::PublishNewsDialog(QWidget *parent)
 	: QDialog(parent)
@@ -52,8 +55,14 @@ void PublishNewsDialog::publish()
 				news.types().push_back(type_service->get_or_create_by_name(type_str));
 			}
 		}
-		news_service->save_news(news);
-		close();
+		auto result = news_service->save_news(news);
+		if (result.success)
+		{
+			close();
+		}
+		QMessageBox::critical(this,
+			QString::fromStdString(lang->get_value("publish", "Publish")),
+			QString::fromStdString(result.err));
 	}
 }
 

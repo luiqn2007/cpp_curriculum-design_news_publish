@@ -31,6 +31,5 @@ Type TypeService::get_or_create_by_name(string type_name)
 		return {row[0].get<int>(), row[1].get<string>()};
 	}
 	auto insert = table.insert("type").values(type_name).execute();
-	auto id = stoi(*insert.getGeneratedIds().begin());
-	return { id, type_name };
+	return { (int) insert.getAutoIncrementValue(), type_name };
 }
