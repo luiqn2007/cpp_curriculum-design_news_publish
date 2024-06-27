@@ -165,13 +165,29 @@ void MainWindow::reload_count_news()
 	reload_news();
 }
 
-void MainWindow::reload_news()
+void MainWindow::search_news()
 {
 	ui.lst_news->clear();
+	string key_words = ui.le_search->text().toStdString();
+	set_widget_visible(8, false, ui.lbl_year, ui.de_year, ui.pb_prev, ui.pb_next, ui.le_page, ui.lbl_page_selector,
+	                   ui.lbl_page, ui.lbl_page_total);
 
-	string type = ui.cb_type->currentText().toStdString();
+	news = news_service->search_news(key_words);
+	for (auto& News : news)
+	{
+		QListWidgetItem* item = new QListWidgetItem();
+		ui.lst_news->addItem(item);
+		ui.lst_news->setItemWidget(item, new NewsItemWidget(&News));
+	}
+}
+
+void MainWindow::reload_news()
+{
+	// 清空已有数据
+	ui.lst_news->clear();
+	// 读取每页数据量
 	int count = get_int_from_widget(ui.le_count, 10, true);
-
+	// 根据不同类型类型更新数据
 	if (ui.cb_type->currentIndex() == 0 /* 热门 */)
 	{
 		news = news_service->get_hot_news(count);
@@ -195,7 +211,7 @@ void MainWindow::reload_news()
 		ui.pb_prev->setEnabled(current_page > 1);
 		ui.pb_next->setEnabled(current_page < total_page);
 	}
-	else
+	else /* 其他类别 */
 	{
 		int type_id = ui.cb_type->currentData().toInt();
 		int current_page = get_int_from_widget(ui.le_page, 1, true);
@@ -205,7 +221,7 @@ void MainWindow::reload_news()
 		ui.pb_prev->setEnabled(current_page > 1);
 		ui.pb_next->setEnabled(current_page < total_page);
 	}
-
+	// 将数据显示到列表中
 	for (auto& News : news)
 	{
 		QListWidgetItem* item = new QListWidgetItem();

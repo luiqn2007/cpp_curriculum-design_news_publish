@@ -86,8 +86,8 @@
    <widget class="QLabel" name="lbl_year">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>84</y>
+      <x>370</x>
+      <y>83</y>
       <width>53</width>
       <height>15</height>
      </rect>
@@ -99,7 +99,7 @@
    <widget class="QDateEdit" name="de_year">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>430</x>
       <y>80</y>
       <width>101</width>
       <height>22</height>
@@ -112,7 +112,7 @@
       <second>0</second>
       <year>2023</year>
       <month>12</month>
-      <day>30</day>
+      <day>29</day>
      </datetime>
     </property>
     <property name="maximumTime">
@@ -284,6 +284,29 @@
      <set>Qt::AlignmentFlag::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QLineEdit" name="le_search">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>80</y>
+      <width>113</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_search">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>79</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>搜索</string>
+    </property>
+   </widget>
    <zorder>lbl_page_total</zorder>
    <zorder>lbl_page_selector</zorder>
    <zorder>label_6</zorder>
@@ -301,6 +324,8 @@
    <zorder>le_page</zorder>
    <zorder>le_count</zorder>
    <zorder>lbl_page</zorder>
+   <zorder>le_search</zorder>
+   <zorder>pb_search</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
@@ -347,7 +372,7 @@
    <slot>reload_archived_news()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>264</x>
+     <x>464</x>
      <y>92</y>
     </hint>
     <hint type="destinationlabel">
@@ -452,6 +477,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pb_search</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>search_news()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>343</x>
+     <y>94</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>253</x>
+     <y>56</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>le_search</sender>
+   <signal>returnPressed()</signal>
+   <receiver>pb_search</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>229</x>
+     <y>93</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>335</x>
+     <y>90</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>view_news(QListWidgetItem*)</slot>
@@ -463,5 +520,6 @@
   <slot>reload_type_news()</slot>
   <slot>reload_page_news()</slot>
   <slot>reload_count_news()</slot>
+  <slot>search_news()</slot>
  </slots>
 </ui>

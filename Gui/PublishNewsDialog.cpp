@@ -59,6 +59,7 @@ void PublishNewsDialog::publish()
 		if (result.success)
 		{
 			close();
+			return;
 		}
 		QMessageBox::critical(this,
 			QString::fromStdString(lang->get_value("publish", "Publish")),

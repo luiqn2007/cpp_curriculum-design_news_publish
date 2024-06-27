@@ -31,6 +31,12 @@ vector<News> NewsService::get_hot_news(int count)
 	return vector<News>();
 }
 
+vector<News> NewsService::search_news(string key)
+{
+	// TODO
+	return vector<News>();
+}
+
 /*
 *design by chenxiang
 */

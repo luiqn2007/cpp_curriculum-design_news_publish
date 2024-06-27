@@ -11,8 +11,12 @@ using std::unordered_map;
 class UserService
 {
 	unordered_map<int, User*> user_cache_;
+	User* unknown_user_;
 
 public:
+	UserService();
+	~UserService();
+
 	/**
 	 * 注册用户
 	 * @param username 用户名

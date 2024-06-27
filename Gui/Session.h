@@ -9,7 +9,6 @@
 #include <mysqlx/xdevapi.h>
 
 using std::string;
-using std::stringstream;
 
 /**
  * 模拟一个会话
@@ -29,12 +28,12 @@ public:
 
 	Session()
 	{
+		// 读取数据库配置
 		Property property;
 		property.read("config.property");
-
-		stringstream url_stream;
 		const string host = property.get_value("host", "127.0.0.1");
-		unsigned port = std::stoul(property.get_value("port", "33060"));
+		// mysqlx 协议默认端口 33060
+		const unsigned port = std::stoul(property.get_value("port", "33060"));
 		const string username = property.get_value("username", "root");
 		const string password = property.get_value("password", "root");
 		const string database = property.get_value("database", "news_system");

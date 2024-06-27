@@ -64,6 +64,11 @@ public slots:
 	 */
 	void reload_count_news();
 
+	/**
+	 * ËÑË÷ÐÂÎÅ
+	 */
+	void search_news();
+
 private:
 	Ui::MainWindowClass ui;
 	vector<News> news;

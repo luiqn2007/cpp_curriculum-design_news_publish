@@ -50,6 +50,13 @@ public:
 	News get_news_by_id(int id);
 
 	/**
+	 * 搜索新闻
+	 * @param key 关键字
+	 * @return 所有搜索出的新闻
+	 */
+	vector<News> search_news(string key);
+
+	/**
 	 * 发布新闻
 	 * @param news 新闻
 	 * @return 发布结果
