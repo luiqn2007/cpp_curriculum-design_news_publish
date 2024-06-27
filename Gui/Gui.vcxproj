@@ -107,7 +107,6 @@
     <QtUic Include="MainWindow.ui" />
     <QtUic Include="NewsDetailDialog.ui" />
     <QtUic Include="NewsEditDialog.ui" />
-    <QtUic Include="NewsItemWidget.ui" />
     <QtUic Include="PublishNewsDialog.ui" />
     <QtUic Include="ReplyDialog.ui" />
   </ItemGroup>
@@ -123,14 +122,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommentService.cpp" />
-    <ClCompile Include="CommentWidget.cpp" />
     <ClCompile Include="Common.cpp" />
     <ClCompile Include="LoginDialog.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="NewsDetailDialog.cpp" />
     <ClCompile Include="NewsEditDialog.cpp" />
-    <ClCompile Include="NewsItemWidget.cpp" />
     <ClCompile Include="NewsService.cpp" />
     <ClCompile Include="Property.cpp" />
     <ClCompile Include="PublishNewsDialog.cpp" />
@@ -154,12 +151,10 @@
     <ClInclude Include="UserService.h" />
     <QtMoc Include="ReplyDialog.h" />
     <QtMoc Include="PublishNewsDialog.h" />
-    <QtMoc Include="NewsItemWidget.h" />
     <QtMoc Include="NewsEditDialog.h" />
     <QtMoc Include="NewsDetailDialog.h" />
     <QtMoc Include="MainWindow.h" />
     <QtMoc Include="LoginDialog.h" />
-    <QtMoc Include="CommentWidget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

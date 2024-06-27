@@ -78,7 +78,7 @@ public:
 	/**
 	 * @return 该评论的所有回复
 	 */
-	vector<Comment> replies()
+	vector<Comment>& replies()
 	{
 		return replies_;
 	}

@@ -7,6 +7,7 @@
 using std::string;
 using std::vector;
 using std::stoi;
+using std::format;
 
 class Session;
 class UserService;

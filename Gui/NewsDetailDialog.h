@@ -10,13 +10,15 @@ class NewsDetailDialog : public QDialog
 	Q_OBJECT
 
 public:
-	NewsDetailDialog(News* news, QWidget* parent = nullptr);
+	explicit NewsDetailDialog(News* news, QWidget* parent = nullptr);
 	~NewsDetailDialog() override = default;
-
+	
 	/**
-	 * 重载评论
+	 * 插入评论
+	 * @param comment 评论内容
+	 * @param reply_to 回复评论编号，0 表示不是回复
 	 */
-	void reload_comments();
+	void insert_comment(Comment comment, int reply_to = 0);
 
 public slots:
 	/**
@@ -25,25 +27,17 @@ public slots:
 	void toggle_like();
 
 	/**
-	 * 编辑新闻
-	 */
-	void edit_news();
-
-	/**
-	 * 删除新闻
-	 */
-	void delete_news();
-
-	/**
-	 * 回复新闻
+	 * 评论新闻
 	 */
 	void comment_news();
+
+	/**
+	 * 回复评论
+	 */
+	void comment_comment(QListWidgetItem* item);
 
 private:
 	Ui::NewsDetailDialogClass ui;
 	News* news_;
-
-	void reload_news();
-
-	int insert_comment(int index, Comment& comment, int reply_to);
+	vector<Comment> comments_;
 };

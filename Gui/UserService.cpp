@@ -28,7 +28,7 @@ ServiceResult UserService::register_user(string username, string password, bool 
 		// 检查用户名与密码是否为空
 		if (username.empty() || password.empty())
 		{
-			return { lang->get_value("name_pwd_empty", "Empty username or password") };
+			return {(*lang)["name_pwd_empty"]};
 		}
 
 		auto schema = session->conn->getDefaultSchema();
@@ -38,7 +38,7 @@ ServiceResult UserService::register_user(string username, string password, bool 
 		auto result = table.select("*").where(format("username = '{}'", username)).execute();
 		if (result.count() > 0)
 		{
-			return {lang->get_value("username_existed", "Username is existed")};
+			return {(*lang)["username_existed"]};
 		}
 
 		// 插入数据
@@ -47,8 +47,7 @@ ServiceResult UserService::register_user(string username, string password, bool 
 		                          .execute();
 		return insert_result.getAffectedItemsCount()
 			       ? ServiceResult{}
-		           // 影响条数为 0 - 没有插入数据
-			       : ServiceResult{lang->get_value("db_insert_failed", "Database insert failed")};
+			       : ServiceResult{(*lang)["db_insert_failed"]};
 	}
 	catch (mysqlx::Error& e)
 	{
@@ -62,7 +61,8 @@ ServiceResult UserService::login(string username, string password)
 	{
 		auto schema = session->conn->getDefaultSchema();
 		auto table = schema.getTable("users");
-		auto rows = table.select("*").where(format("username = '{}' and password = '{}'", username, password)).execute();
+		auto rows = table.select("*").where(format("username = '{}' and password = '{}'", username, password)).
+		                  execute();
 		for (auto d : rows)
 		{
 			int id = d[0].get<int>();
@@ -71,11 +71,10 @@ ServiceResult UserService::login(string username, string password)
 			session->user = new User(id, uname, is_admin);
 			return {};
 		}
-		return {lang->get_value("error_user_pwd", "Error: Wrong username or password")};
+		return {(*lang)["error_user_pwd"]};
 	}
 	catch (mysqlx::Error& e)
 	{
-		printf_s("%s\n", e.what());
 		return {e.what()};
 	}
 }
@@ -87,11 +86,12 @@ bool UserService::is_login_user_like(News& news)
 	{
 		try
 		{
-			auto schema = session->conn->getDefaultSchema();
-			is_like = schema.getTable("news_types", true)
-			                .select(format("news_id = {} and user_id = {}", news.id(), session->user->id()))
-			                .execute()
-			                .count() > 0;
+			is_like = session->conn->getDefaultSchema()
+			                 .getTable("likes", true)
+			                 .select("*")
+			                 .where(format("news_id = {} and user_id = {}", news.id(), session->user->id()))
+			                 .execute()
+			                 .count() > 0;
 		}
 		catch (mysqlx::Error& e)
 		{
@@ -112,13 +112,14 @@ bool UserService::toggle_login_user_like(const News& news)
 	try
 	{
 		auto schema = session->conn->getDefaultSchema();
-		auto table = schema.getTable("news_types", true);
+		auto table = schema.getTable("likes", true);
 
 		// 点赞数据
 		auto sql = format("news_id = {} and user_id = {}", news.id(), session->user->id());
 
 		// 查询是否已经点赞
-		if (table.select(sql).execute().count() > 0)
+		auto result = table.select("*").where(sql).execute();
+		if (result.count() > 0)
 		{
 			// 取消点赞
 			table.remove().where(sql).execute();

@@ -14,11 +14,13 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
+
 	explicit MainWindow(QWidget* parent = nullptr);
 	~MainWindow() override = default;
 
-public slots:
+	void set_news_like(int news_id, bool is_like);
 
+public slots:
 	/**
 	 * 发布新闻
 	 */
@@ -69,11 +71,32 @@ public slots:
 	 */
 	void search_news();
 
+	/**
+	 * 打开列表右键菜单
+	 * @param pos 鼠标位置
+	 */
+	void open_right_menu(QPoint pos);
+
+	/**
+	 * 编辑新闻
+	 */
+	void edit_news();
+
+	/**
+	 * 删除新闻
+	 */
+	void delete_news();
+
 private:
 	Ui::MainWindowClass ui;
-	vector<News> news;
+
+	QMenu* list_menu_;
+	vector<News> news_;
+	QListWidgetItem* option_item_;
 
 	void reload_news();
+
+	void apply_news();
 
 	static int get_int_from_widget(QLineEdit* editor, int default_count, bool set_to_editor = false);
 

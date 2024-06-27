@@ -73,19 +73,6 @@
     <string>2024/06/22</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pb_edit">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>50</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>编辑</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="lbl_like_count">
    <property name="geometry">
     <rect>
@@ -164,19 +151,6 @@
     <enum>QAbstractItemView::SelectionMode::NoSelection</enum>
    </property>
   </widget>
-  <widget class="QPushButton" name="pb_delete">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>50</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>删除</string>
-   </property>
-  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
@@ -200,22 +174,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>pb_edit</sender>
-   <signal>clicked()</signal>
-   <receiver>NewsDetailDialogClass</receiver>
-   <slot>edit_news()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>55</x>
-     <y>59</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>137</x>
-     <y>53</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>pb_comment</sender>
    <signal>clicked()</signal>
    <receiver>NewsDetailDialogClass</receiver>
@@ -232,18 +190,18 @@
    </hints>
   </connection>
   <connection>
-   <sender>pb_delete</sender>
-   <signal>clicked()</signal>
+   <sender>lw_comment</sender>
+   <signal>itemClicked(QListWidgetItem*)</signal>
    <receiver>NewsDetailDialogClass</receiver>
-   <slot>delete_news()</slot>
+   <slot>comment_comment(QListWidgetItem*)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>117</x>
-     <y>64</y>
+     <x>744</x>
+     <y>244</y>
     </hint>
     <hint type="destinationlabel">
-     <x>209</x>
-     <y>53</y>
+     <x>707</x>
+     <y>11</y>
     </hint>
    </hints>
   </connection>
@@ -253,5 +211,6 @@
   <slot>edit_news()</slot>
   <slot>comment_news()</slot>
   <slot>delete_news()</slot>
+  <slot>comment_comment(QListWidgetItem*)</slot>
  </slots>
 </ui>

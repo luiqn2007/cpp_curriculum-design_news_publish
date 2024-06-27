@@ -36,7 +36,7 @@ ServiceResult CommentService::comment(const Comment& comment)
 		}
 		else
 		{
-			return {lang->get_value("error_status", "Invalid login status")};
+			return { (*lang)["error_status"] };
 		}
 	}
 	catch (mysqlx::Error& ex)

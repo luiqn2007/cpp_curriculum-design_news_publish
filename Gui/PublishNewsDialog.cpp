@@ -12,7 +12,7 @@
 
 using std::vector;
 
-PublishNewsDialog::PublishNewsDialog(QWidget *parent)
+PublishNewsDialog::PublishNewsDialog(QWidget* parent)
 	: QDialog(parent)
 {
 	ui.setupUi(this);
@@ -24,21 +24,15 @@ void PublishNewsDialog::publish()
 {
 	if (!session->user)
 	{
-		QMessageBox::critical(this, 
-			QString::fromStdString(lang->get_value("publish", "Publish")),
-			QString::fromStdString(lang->get_value("error_status", "Invalid login status")));
+		QMessageBox::critical(this, lang->qt("publish"), lang->qt("error_status"));
 	}
 	else if (!session->user->is_admin())
 	{
-		QMessageBox::critical(this,
-			QString::fromStdString(lang->get_value("publish", "Publish")),
-			QString::fromStdString(lang->get_value("insufficient_permissions", "Insufficient permissions")));
+		QMessageBox::critical(this, lang->qt("publish"), lang->qt("insufficient_permissions"));
 	}
 	else if (ui.le_title->text().isEmpty())
 	{
-		QMessageBox::critical(this,
-			QString::fromStdString(lang->get_value("publish", "Publish")),
-			QString::fromStdString(lang->get_value("no_title", "Please write title first")));
+		QMessageBox::critical(this, lang->qt("publish"), lang->qt("no_title"));
 	}
 	else
 	{
@@ -61,9 +55,6 @@ void PublishNewsDialog::publish()
 			close();
 			return;
 		}
-		QMessageBox::critical(this,
-			QString::fromStdString(lang->get_value("publish", "Publish")),
-			QString::fromStdString(result.err));
+		QMessageBox::critical(this, lang->qt("publish"), QString::fromStdString(result.err));
 	}
 }
-

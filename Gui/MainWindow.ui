@@ -10,6 +10,9 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
+  </property>
   <property name="windowTitle">
    <string>新闻发布系统</string>
   </property>
@@ -22,6 +25,9 @@
       <width>771</width>
       <height>431</height>
      </rect>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -112,7 +118,7 @@
       <second>0</second>
       <year>2023</year>
       <month>12</month>
-      <day>29</day>
+      <day>28</day>
      </datetime>
     </property>
     <property name="maximumTime">
@@ -202,6 +208,9 @@
       <width>75</width>
       <height>23</height>
      </rect>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
     </property>
     <property name="text">
      <string>下一页</string>
@@ -509,6 +518,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>lst_news</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>open_right_menu(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>691</x>
+     <y>284</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>636</x>
+     <y>51</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>view_news(QListWidgetItem*)</slot>
@@ -521,5 +546,6 @@
   <slot>reload_page_news()</slot>
   <slot>reload_count_news()</slot>
   <slot>search_news()</slot>
+  <slot>open_right_menu(QPoint)</slot>
  </slots>
 </ui>

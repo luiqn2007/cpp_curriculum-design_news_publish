@@ -1,6 +1,8 @@
 #include "Property.h"
 
 #include <fstream>
+#include <qimage.h>
+#include <qstring.h>
 
 using std::fstream;
 using std::getline;
@@ -30,4 +32,14 @@ string Property::get_value(const string& key, string default_value)
 		return properties_[key];
 	}
 	return default_value;
+}
+
+QString Property::qt(const string& key)
+{
+	return QString::fromStdString(properties_[key]);
+}
+
+string Property::operator[](const string& key)
+{
+	return properties_[key];
 }

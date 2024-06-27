@@ -6,6 +6,8 @@
 using std::unordered_map;
 using std::string;
 
+class QString;
+
 /**
  * 读取 properties 配置信息
  */
@@ -27,4 +29,8 @@ public:
 	 * @return 值
 	 */
 	string get_value(const string& key, string default_value);
+
+	QString qt(const string& key);
+
+	string operator[](const string& key);
 };

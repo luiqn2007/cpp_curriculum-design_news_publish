@@ -49,9 +49,6 @@
     </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="NewsItemWidget.ui">
-      <Filter>窗口文件</Filter>
-    </QtUic>
     <QtUic Include="PublishNewsDialog.ui">
       <Filter>窗口文件</Filter>
     </QtUic>
@@ -112,9 +109,6 @@
     <ClCompile Include="NewsService.cpp">
       <Filter>源文件\service</Filter>
     </ClCompile>
-    <ClCompile Include="CommentWidget.cpp">
-      <Filter>源文件\gui</Filter>
-    </ClCompile>
     <ClCompile Include="LoginDialog.cpp">
       <Filter>源文件\gui</Filter>
     </ClCompile>
@@ -125,9 +119,6 @@
       <Filter>源文件\gui</Filter>
     </ClCompile>
     <ClCompile Include="NewsEditDialog.cpp">
-      <Filter>源文件\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="NewsItemWidget.cpp">
       <Filter>源文件\gui</Filter>
     </ClCompile>
     <ClCompile Include="PublishNewsDialog.cpp">
@@ -179,9 +170,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="CommentWidget.h">
-      <Filter>头文件\gui</Filter>
-    </QtMoc>
     <QtMoc Include="LoginDialog.h">
       <Filter>头文件\gui</Filter>
     </QtMoc>
@@ -192,9 +180,6 @@
       <Filter>头文件\gui</Filter>
     </QtMoc>
     <QtMoc Include="NewsEditDialog.h">
-      <Filter>头文件\gui</Filter>
-    </QtMoc>
-    <QtMoc Include="NewsItemWidget.h">
       <Filter>头文件\gui</Filter>
     </QtMoc>
     <QtMoc Include="PublishNewsDialog.h">

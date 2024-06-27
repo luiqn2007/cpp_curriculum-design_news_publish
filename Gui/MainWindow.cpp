@@ -2,20 +2,23 @@
 
 #include <cstdarg>
 #include <QMessageBox>
+#include <QMenu>
 
 #include "Common.h"
 #include "LoginDialog.h"
 #include "NewsDetailDialog.h"
-#include "NewsItemWidget.h"
+#include "NewsEditDialog.h"
 #include "Session.h"
 #include "NewsService.h"
 #include "PublishNewsDialog.h"
 #include "TypeService.h"
+#include "UserService.h"
 
 MainWindow::MainWindow(QWidget* parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
+
 	ui.pb_publish->setVisible(false);
 	ui.pb_publish->setEnabled(false);
 
@@ -25,22 +28,34 @@ MainWindow::MainWindow(QWidget* parent)
 		ui.cb_type->addItem(QString::fromStdString(type.type()), QVariant(type.id()));
 	}
 	this->reload_type_news();
+
+	list_menu_ = new QMenu;
+	list_menu_->addAction(lang->qt("edit"), this, SLOT(edit_news()));
+	list_menu_->addAction(lang->qt("delete"), this, SLOT(delete_news()));
+}
+
+void MainWindow::set_news_like(int news_id, bool is_like)
+{
+	for (int i = 0; i < ui.lst_news->count(); ++i)
+	{
+		const auto item = ui.lst_news->item(i);
+		if (news_id == news_[get<int>(item->data(Qt::UserRole))].id())
+		{
+			string icon_res = (*lang)[is_like ? "img_like" : "img_unlike"];
+			item->setIcon(QIcon(QPixmap::fromImage(QImage(icon_res.c_str()))));
+		}
+	}
 }
 
 void MainWindow::publish_news()
 {
 	if (!session->user)
 	{
-		QMessageBox::critical(this,
-		                      QString::fromStdString(lang->get_value("publish_news", "Publish News")),
-		                      QString::fromStdString(lang->get_value("login_first", "Login First Please")));
+		QMessageBox::critical(this, lang->qt("publish_news"), lang->qt("login_first"));
 	}
 	else if (!session->user->is_admin())
 	{
-		QMessageBox::critical(this,
-		                      QString::fromStdString(lang->get_value("publish_news", "Publish News")),
-		                      QString::fromStdString(
-			                      lang->get_value("only_admin_can_publish", "Only administrator can publish news")));
+		QMessageBox::critical(this, lang->qt("publish_news"), lang->qt("only_admin_can_publish"));
 	}
 	else
 	{
@@ -81,11 +96,9 @@ void MainWindow::login_or_logout()
 	if (session->user)
 	{
 		session->user = nullptr;
-		QMessageBox::information(this,
-		                         QString::fromStdString(lang->get_value("logout", "Logout")),
-		                         QString::fromStdString(lang->get_value("logout_success", "Logout Succeed")));
-		ui.pb_login->setText(QString::fromStdString(lang->get_value("login_or_register", "Login/Register")));
-		ui.lbl_user->setText(QString::fromStdString(lang->get_value("tourist", "Tourist")));
+		QMessageBox::information(this, lang->qt("logout"), lang->qt("logout_success"));
+		ui.pb_login->setText(lang->qt("login_or_register"));
+		ui.lbl_user->setText(lang->qt("tourist"));
 		ui.pb_publish->setEnabled(false);
 		ui.pb_publish->setVisible(false);
 	}
@@ -94,7 +107,7 @@ void MainWindow::login_or_logout()
 		LoginDialog().exec();
 		if (session->user)
 		{
-			ui.pb_login->setText(QString::fromStdString(lang->get_value("logout", "Logout")));
+			ui.pb_login->setText(lang->qt("logout"));
 			ui.lbl_user->setText(QString::fromStdString(session->user->username()));
 			if (session->user->is_admin())
 			{
@@ -102,13 +115,13 @@ void MainWindow::login_or_logout()
 				ui.pb_publish->setVisible(true);
 			}
 		}
+		apply_news();
 	}
 }
 
 void MainWindow::view_news(QListWidgetItem* item)
 {
-	const int row = item->listWidget()->currentRow();
-	if (NewsDetailDialog(&news[row], this).exec())
+	if (NewsDetailDialog(&news_[item->listWidget()->currentRow()], this).exec())
 	{
 		reload_news();
 	}
@@ -168,35 +181,93 @@ void MainWindow::reload_count_news()
 void MainWindow::search_news()
 {
 	ui.lst_news->clear();
-	string key_words = ui.le_search->text().toStdString();
 	set_widget_visible(8, false, ui.lbl_year, ui.de_year, ui.pb_prev, ui.pb_next, ui.le_page, ui.lbl_page_selector,
 	                   ui.lbl_page, ui.lbl_page_total);
 
-	news = news_service->search_news(key_words);
-	for (auto& News : news)
+	news_ = news_service->search_news(ui.le_search->text().toStdString());
+	apply_news();
+}
+
+void MainWindow::open_right_menu(QPoint pos)
+{
+	if (session->user && session->user->is_admin())
 	{
-		QListWidgetItem* item = new QListWidgetItem();
-		ui.lst_news->addItem(item);
-		ui.lst_news->setItemWidget(item, new NewsItemWidget(&News));
+		option_item_ = ui.lst_news->itemAt(pos);
+		if (option_item_)
+		{
+			list_menu_->exec(pos + ui.lst_news->pos() + this->geometry().topLeft());
+		}
+	}
+}
+
+void MainWindow::edit_news()
+{
+	if (!session->user)
+	{
+		QMessageBox::critical(this, lang->qt("edit_news"), lang->qt("error_status"));
+	}
+	else if (!session->user->is_admin())
+	{
+		QMessageBox::critical(this, lang->qt("edit_news"), lang->qt("only_admin_can_edit"));
+	}
+	else
+	{
+		const auto i = get<int>(option_item_->data(Qt::UserRole));
+		if (NewsEditDialog(&news_[i], dynamic_cast<QWidget*>(parent())).exec())
+		{
+			option_item_->setData(Qt::DisplayRole, QString::fromStdString(news_[i].title()));
+		}
+	}
+	option_item_ = nullptr;
+}
+
+void MainWindow::delete_news()
+{
+	if (!session->user)
+	{
+		QMessageBox::critical(this, lang->qt("delete_news"), lang->qt("error_status"));
+	}
+	else if (!session->user->is_admin())
+	{
+		QMessageBox::critical(this, lang->qt("delete_news"), lang->qt("only_admin_can_edit"));
+	}
+	else
+	{
+		const auto i = get<int>(option_item_->data(Qt::UserRole));
+		const auto result = news_service->delete_news(news_[i]);
+		if (result.success)
+		{
+			QMessageBox::information(this, lang->qt("delete_news"), lang->qt("deleted"));
+		}
+		else
+		{
+			QMessageBox::critical(this, lang->qt("delete_news"), QString::fromStdString(result.err));
+		}
+		option_item_ = nullptr;
+		reload_news();
 	}
 }
 
 void MainWindow::reload_news()
 {
-	// 清空已有数据
-	ui.lst_news->clear();
 	// 读取每页数据量
 	int count = get_int_from_widget(ui.le_count, 10, true);
 	// 根据不同类型类型更新数据
 	if (ui.cb_type->currentIndex() == 0 /* 热门 */)
 	{
-		news = news_service->get_hot_news(count);
+		news_ = news_service->get_hot_news(count);
+		if (news_.empty())
+		{
+			int tt;
+			auto list = news_service->get_latest_news(1, count, tt);
+			news_.insert(news_.end(), list.begin(), list.end());
+		}
 	}
 	else if (ui.cb_type->currentIndex() == 1 /* 全部 */)
 	{
 		int current_page = get_int_from_widget(ui.le_page, 1, true);
 		int total_page = 1;
-		news = news_service->get_latest_news(current_page, count, total_page);
+		news_ = news_service->get_latest_news(current_page, count, total_page);
 		ui.lbl_page->setText(QString::number(total_page));
 		ui.pb_prev->setEnabled(current_page > 1);
 		ui.pb_next->setEnabled(current_page < total_page);
@@ -206,7 +277,7 @@ void MainWindow::reload_news()
 		int year = ui.de_year->date().year();
 		int current_page = get_int_from_widget(ui.le_page, 1, true);
 		int total_page = 1;
-		news = news_service->get_archived_news(year, current_page, count, total_page);
+		news_ = news_service->get_archived_news(year, current_page, count, total_page);
 		ui.lbl_page->setText(QString::number(total_page));
 		ui.pb_prev->setEnabled(current_page > 1);
 		ui.pb_next->setEnabled(current_page < total_page);
@@ -216,17 +287,35 @@ void MainWindow::reload_news()
 		int type_id = ui.cb_type->currentData().toInt();
 		int current_page = get_int_from_widget(ui.le_page, 1, true);
 		int total_page = 1;
-		news = news_service->get_news_by_type(type_id, current_page, count, total_page);
+		news_ = news_service->get_news_by_type(type_id, current_page, count, total_page);
 		ui.lbl_page->setText(QString::number(total_page));
 		ui.pb_prev->setEnabled(current_page > 1);
 		ui.pb_next->setEnabled(current_page < total_page);
 	}
+	apply_news();
+}
+
+void MainWindow::apply_news()
+{
+	// 清空已有数据
+	ui.lst_news->clear();
 	// 将数据显示到列表中
-	for (auto& News : news)
+	for (int i = 0; i < news_.size(); ++i)
 	{
 		QListWidgetItem* item = new QListWidgetItem();
+		News& news = news_[i];
+		item->setText(QString::fromStdString(news.title()));
+		item->setData(Qt::UserRole, QVariant(i));
+		item->setToolTip(QString::fromStdString(format("author {} publish at {}", news.author(), news.publish_date())));
+		if (user_service->is_login_user_like(news))
+		{
+			item->setIcon(QIcon(QPixmap::fromImage(QImage((*lang)["img_like"].c_str()))));
+		}
+		else
+		{
+			item->setIcon(QIcon(QPixmap::fromImage(QImage((*lang)["img_unlike"].c_str()))));
+		}
 		ui.lst_news->addItem(item);
-		ui.lst_news->setItemWidget(item, new NewsItemWidget(&News));
 	}
 }
 

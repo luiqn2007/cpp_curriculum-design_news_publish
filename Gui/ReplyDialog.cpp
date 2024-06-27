@@ -1,24 +1,22 @@
 #include "ReplyDialog.h"
 
-#include <format>
 #include <qdatetime.h>
 #include <QMessageBox>
 
 #include "Common.h"
 #include "Session.h"
 #include "CommentService.h"
+#include "NewsDetailDialog.h"
 #include "NewsService.h"
 
-using std::format;
-
-ReplyDialog::ReplyDialog(Comment* comment, QWidget* parent)
-	: QDialog(parent), comment_(comment), news_(nullptr)
+ReplyDialog::ReplyDialog(Comment* comment, int reply_to, QWidget* parent)
+	: QDialog(parent), comment_(comment), news_(nullptr), reply_to_(reply_to)
 {
 	ui.setupUi(this);
 }
 
 ReplyDialog::ReplyDialog(News* news, QWidget* parent)
-	: QDialog(parent), comment_(nullptr), news_(news)
+	: QDialog(parent), comment_(nullptr), news_(news), reply_to_(0)
 {
 	ui.setupUi(this);
 }
@@ -27,28 +25,33 @@ void ReplyDialog::reply()
 {
 	if (!session->user)
 	{
-		QMessageBox::critical(this, 
-			QString::fromStdString(lang->get_value("error", "Error")), 
-			QString::fromStdString(lang->get_value("error_status", "Invalid login status")));
+		QMessageBox::critical(this, lang->qt("error"), lang->qt("error_status"));
 		reject();
 	}
 	else
 	{
 		string rep = ui.te_reply->toPlainText().toStdString();
-		QDate now = QDate::currentDate();
-		string publish_date = QDate::currentDate().toString("yyyy/MM/dd").toStdString();
+		string publish_date = QDate::currentDate().toString("yyyy-MM-dd").toStdString();
 		if (comment_)
 		{
 			const Comment comment(0, rep, publish_date, *session->user, comment_->news(), comment_);
-			comment_service->comment(comment);
+			if (auto result = comment_service->comment(comment); !result.success)
+			{
+				QMessageBox::critical(this, lang->qt("error"), QString::fromStdString(result.err));
+				return;
+			}
+			dynamic_cast<NewsDetailDialog*>(parent())->insert_comment(comment, reply_to_);
 		}
 		else
 		{
 			const Comment comment(0, rep, publish_date, *session->user, news_, nullptr);
-			comment_service->comment(comment);
+			if (auto result = comment_service->comment(comment); !result.success)
+			{
+				QMessageBox::critical(this, lang->qt("error"), QString::fromStdString(result.err));
+				return;
+			}
+			dynamic_cast<NewsDetailDialog*>(parent())->insert_comment(comment, reply_to_);
 		}
 		accept();
 	}
-	
 }
-
